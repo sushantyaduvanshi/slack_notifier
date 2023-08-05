@@ -42,12 +42,15 @@ def del_message(msg , channel):
 
 if(__name__ == '__main__'):
 
-    if(len(sys.argv) > 2):
-
-        send_message(msg=sys.argv[1], channel=sys.argv[2])
-
+    if(len(sys.argv) > 1):
+        msg = sys.argv[1]
+        if(len(sys.argv) > 2):
+            channel = sys.argv[2]
+        else:
+            channel = input("Provide channel name >>> ")
     else:
-
         msg = input("Enter message >>> ")
         channel = input("Provide channel name >>> ")
-        send_message(msg, channel)
+    if(channel[:1] != '#'):
+        channel = '#'+channel
+    send_message(msg, channel)
