@@ -10,6 +10,8 @@ client = WebClient(token=os.getenv("SLACK_TOKEN"))
 
 def send_message(msg, channel):
     try:
+        if(channel[:1] != '#'):
+            channel = '#'+channel
         response = client.chat_postMessage(
             channel=channel,
             text=msg
@@ -51,6 +53,4 @@ if(__name__ == '__main__'):
     else:
         msg = input("Enter message >>> ")
         channel = input("Provide channel name >>> ")
-    if(channel[:1] != '#'):
-        channel = '#'+channel
     send_message(msg, channel)
