@@ -17,9 +17,12 @@ def send_message(msg, channel):
             text=msg
         )
         print(response)
+        if(response.get('ok') and not response['ok']):
+            return False, response.get('error')
+        return True, None
     except SlackApiError as e:
-        print('error :', e)
-        assert e.response["error"]
+        print('error exce:', e, 'end')
+        return False, e.response.get("error")
         
         
 def get_message_list(channel):
